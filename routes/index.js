@@ -37,35 +37,54 @@ router.post('/analyze', function(req, res, next) {
 
 router.post('/post', function(req,res,next) {
 	var req_user_id = req.body.user_id;
-	var text = req.body.payload;
+	var req_text = req.body.payload;
 	var req_day = req.body.day;
 	var req_month = req.body.month;
 	var req_year = req.body.year;
 
 	console.log(req.body);
 
-	//mongoose.connect('mongodb://localhost:27017/icare');
 	// if our user.js file is at app/models/user.js
 	var diaryEntry = require('../models/diaryEntry.js');
-	// create a new user called chris
-	var entry = new diaryEntry({
-	  user_id: req_user_id,
-	  date: {
-		  day: req_day,
-		  month: req_month,
-		  year: req_year
-	  },
-	  body: text
-	});
+	
+	/*diaryEntry
+	.findone({
+			user_id:req_user_id,
+			'date.day': req_day,
+			'date.month': req_month,
+			'date.year': req_year
+	})
+	.exec(function(err, existing_entry) {
+		if ( err ) {
+			console.log(err);
+			throw err;
+		}
+		//existing entry for that day is found, stop registration
+		if ( existing_entry ) {
+			console.log("entry already exists");
+			return;
+		}
+		console.log("entry created");
+	});*/
 
-	entry.save(function(err) {
+	var entry = new diaryEntry({
+			user_id: req_user_id,
+			date: {
+				day: req_day,
+				month: req_month,
+				year: req_year
+			},
+			body: req_text
+		});
+
+		entry.save(function(err) {
   		if (err) {
   			console.log(err);
-  			res.status(500).json({status:"db save failed",user:req_user_id,body:text});
-  			throw err;
+  			res.status(500).json({status:"failed"});
+  			return;
   		}
 		console.log('Entry saved successfully!');
-		res.status(200).json({status:"ok",user:req_user_id,body:text,date:req_date+' '+req_month+' '+req_year});
+		res.status(200).json({status:"ok",user:req_user_id,date:''+req_day+'-'+req_month+'-'+req_year});
 	});
 });
 
