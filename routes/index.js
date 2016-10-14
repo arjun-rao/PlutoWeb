@@ -38,7 +38,9 @@ router.post('/analyze', function(req, res, next) {
 router.post('/post', function(req,res,next) {
 	var req_user_id = req.body.user_id;
 	var text = req.body.payload;
-	var time = Date.now();
+	var req_day = req.body.day;
+	var req_month = req.body.month;
+	var req_year = req.body.year;
 
 	console.log(req.body);
 
@@ -48,7 +50,12 @@ router.post('/post', function(req,res,next) {
 	// create a new user called chris
 	var entry = new diaryEntry({
 	  user_id: req_user_id,
-	  body: text 
+	  date: {
+		  day: req_day,
+		  month: req_month,
+		  year: req_year
+	  },
+	  body: text
 	});
 
 	entry.save(function(err) {
