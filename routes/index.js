@@ -65,7 +65,7 @@ router.post('/post', function(req,res,next) {
   			throw err;
   		}
 		console.log('Entry saved successfully!');
-		res.status(200).json({status:"ok",user:req_user_id,body:text});
+		res.status(200).json({status:"ok",user:req_user_id,body:text,date:req_date+' '+req_month+' '+req_year});
 	});
 });
 
