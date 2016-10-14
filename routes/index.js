@@ -5,28 +5,32 @@ var bluemix = require('../config/bluemix');
 var extend = require('util')._extend;
 var watson = require('watson-developer-cloud');
 
-var credentials = extend({
-	version : 'v1',
-    "url": "https://gateway.watsonplatform.net/natural-language-classifier/api",
-    "username": "8fa73cbf-7356-4a2c-8add-c762f2b262ab",
-    "password": "lr0GCcnAQxYQ"
-}, bluemix.getServiceCreds('natural_language_classifier')); 
+var alchemy_language = watson.alchemy_language({
+  api_key: 'e5c15cad20f0fdee05566005da27dbbbfd41d31a'
+});
 
-var nlClassifier = watson.natural_language_classifier(credentials);
-var classifierId = '2a3456x99-nlc-9921';
 
-router.post('/predict', function(req, res, next) {
-	var params = {
-		classifier : classifierId,
+router.post('/analyze', function(req, res, next) {
+	
+	var parameters = {
+		extract: 'entities,doc-emotion',
+		sentiment: 1,
+
+		maxRetrieve: 1,
 		text : req.body.text
 	};
 
-	nlClassifier.classify(params, function(err, results) {
+
+	alchemy_language.combined(parameters, function (err, response) {
 		if (err)
 			return next(err);
 		else
-			res.json(results);
+		{
+			console.log(JSON.stringify(response, null, 2));
+			res.send(JSON.stringify(response,null,2));
+		}
 	});
+	
 });
 
 /* GET home page. */

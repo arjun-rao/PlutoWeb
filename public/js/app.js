@@ -7,10 +7,10 @@
 		$scope.showResult = false;
 
 		$scope.onSubmit = function() {
-			$http.post('/predict', { text: $scope.text })
+			$http.post('/analyze', { text: $scope.text })
 			.then(function successCallback(response) {
-				$scope.result = 'I think the movie was ' + response.data.classes[0].class_name
-					+ ' with a ' + (response.data.classes[0].confidence * 100).toFixed(2) + '% confidence';
+				$scope.result = JSON.stringify(response.data.entities)+'\n'+JSON.stringify(response.data.docEmotions);					
+				//console.log(response);
 				$scope.showResult = true;
 			}, function errorCallback(response) {
 				$scope.result = 'Oops! Something went wrong :(';

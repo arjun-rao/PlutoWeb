@@ -15,10 +15,10 @@
 				<h1>Analyse Entry</h1>
 				<div class="form-group">
 					<label for="inputlg">Dear Diary...</label>
-					<input class="form-control input-lg" id="inputlg" type="text" ng-model="text"><br />
+					<textarea style="margin: 0px -2px 0px 0px; width: 580px; height: 485px;" class="form-control input-lg" id="inputlg" ng-model="text"></textarea><br>
 					<button class="btn btn-lg btn-success" ng-click="onSubmit()">Submit</a>
 				</div>
-				<h4 ng-if="showResult">{{ result }}</h4>
+				<textarea style="margin: 0px; width: 496px; height: 130px;" ng-if="showResult">{{ result }}</textarea>
 			</div>
 		</div>
 		<script src="js/jquery/jquery-2.1.4.min.js"></script>
