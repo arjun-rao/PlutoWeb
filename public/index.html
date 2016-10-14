@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="angularApp">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<title>PlutoWeb Endpoint</title>
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/jumbotron-narrow.css" rel="stylesheet">
+	</head>
+	<body ng-controller="nlcController">
+		<div class="container">
+			<div class="jumbotron">
+				<h1>Analyse Entry</h1>
+				<div class="form-group">
+					<label for="inputlg">Dear Diary...</label>
+					<input class="form-control input-lg" id="inputlg" type="text" ng-model="text"><br />
+					<button class="btn btn-lg btn-success" ng-click="onSubmit()">Submit</a>
+				</div>
+				<h4 ng-if="showResult">{{ result }}</h4>
+			</div>
+		</div>
+		<script src="js/jquery/jquery-2.1.4.min.js"></script>
+		<script src="js/bootstrap/bootstrap.min.js"></script>
+		<script src="js/angular/angular.min.js"></script>
+		<script src="js/app.js"></script>
+	</body>
+</html>
