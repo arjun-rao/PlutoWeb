@@ -13,25 +13,50 @@ var alchemy_language = watson.alchemy_language({
 
 
 router.post('/analyze', function(req, res, next) {
-	
+		
+	//Watson Code Starts Here
+	var watson_reply = '';
+	var req_text = req.body.payload;
+	var time = Date.now();
 	var parameters = {
 		extract: 'entities,doc-emotion',
 		sentiment: 1,
-
 		maxRetrieve: 1,
-		text : req.body.text
+		text : req_text
 	};
 
 
 	alchemy_language.combined(parameters, function (err, response) {
 		if (err)
+		{
+			console.log("Watson Died!");
 			return next(err);
+		}
 		else
 		{
 			console.log(JSON.stringify(response, null, 2));
-			res.send(JSON.stringify(response,null,2));
+			watson_reply = JSON.stringify(response,null,2);
+			//save everything to the local db
+			var req_user_id = "default_web";					
+			var diaryEntry = require('../models/diaryEntry.js');
+			// create a new user called chris
+			var entry = new diaryEntry({
+			user_id: req_user_id,
+			body: req_text,
+			watson_response: watson_reply 
+			});
+
+			entry.save(function(err) {
+				if (err) {
+					console.log(err);
+					res.status(500).json({status:"db save failed",user:req_user_id});
+					throw err;
+				}
+				console.log('Entry saved successfully!');
+				res.send(watson_reply);
+			});
 		}
-	});
+	});	
 	
 });
 
@@ -39,27 +64,54 @@ router.post('/post', function(req,res,next) {
 	var req_user_id = req.body.user_id;
 	var text = req.body.payload;
 	var time = Date.now();
+	
+	//Watson Code Starts Here
+	var watson_reply = '';
+	var req_user_id = req.body.user_id;
+	var req_text = req.body.payload;
+	var time = Date.now();
+	var parameters = {
+		extract: 'entities,doc-emotion',
+		sentiment: 1,
+		maxRetrieve: 1,
+		text : req_text
+	};
 
-	console.log(req.body);
 
-	//mongoose.connect('mongodb://localhost:27017/icare');
-	// if our user.js file is at app/models/user.js
-	var diaryEntry = require('../models/diaryEntry.js');
-	// create a new user called chris
-	var entry = new diaryEntry({
-	  user_id: req_user_id,
-	  body: text 
-	});
+	alchemy_language.combined(parameters, function (err, response) {
+		if (err)
+		{
+			console.log("Watson Died!");
+			return next(err);
+		}
+		else
+		{
+			console.log(JSON.stringify(response, null, 2));
+			watson_reply = JSON.stringify(response,null,2);
+			//save everything to the local db														
+			var diaryEntry = require('../models/diaryEntry.js');
+			// create a new user called chris
+			var entry = new diaryEntry({
+			user_id: req_user_id,
+			body: req_text,
+			watson_response: watson_reply 
+			});
 
-	entry.save(function(err) {
-  		if (err) {
-  			console.log(err);
-  			res.status(500).json({status:"db save failed",user:req_user_id,body:text});
-  			throw err;
-  		}
-		console.log('Entry saved successfully!');
-		res.status(200).json({status:"ok",user:req_user_id,body:text});
-	});
+			entry.save(function(err) {
+				if (err) {
+					console.log(err);
+					res.status(500).json({status:"db save failed",user:req_user_id});
+					throw err;
+				}
+				console.log('Entry saved successfully!');
+				res.status(200).json({status:"ok",user:req_user_id});
+			});
+		}
+	});	
+
+
+
+
 });
 
 /* GET home page. */
