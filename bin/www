@@ -7,6 +7,7 @@
 var app = require('../app');
 var debug = require('debug')('nlcdemo:server');
 var http = require('http');
+var mongoose = require('mongoose');
 
 /**
  * Get port from environment and store in Express.
@@ -25,9 +26,11 @@ var server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port);
-server.on('error', onError);
-server.on('listening', onListening);
+ function listen(){
+  server.listen(port);
+  server.on('error', onError);
+  server.on('listening', onListening);
+ }
 
 /**
  * Normalize a port into a number, string, or false.
@@ -87,4 +90,19 @@ function onListening() {
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
+  console.log('Server listening on ' + bind);
 }
+
+function connect () {
+  var options = { server: { socketOptions: { keepAlive: 1 } } };
+  return mongoose.connect('mongodb://localhost:27017/icare', options).connection;
+}
+
+connect()
+    .on('error', console.log)
+    .on('disconnected', connect)
+    .once('open', function() {
+      // we're connected!
+      console.log('Mongoose connected to mongodb');
+      listen();
+    });
