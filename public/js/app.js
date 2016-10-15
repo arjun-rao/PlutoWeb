@@ -2,12 +2,12 @@
 	var app = angular.module('angularApp', []);
 	
 	app.controller('nlcController', [ '$scope', '$http', function($scope, $http) {
-		$scope.text = '';
+		$scope.payload = '';
 		$scope.result = '';
 		$scope.showResult = false;
 
 		$scope.onSubmit = function() {
-			$http.post('/analyze', { text: $scope.text })
+			$http.post('/analyze', { payload: $scope.payload })
 			.then(function successCallback(response) {
 				$scope.result = JSON.stringify(response.data.entities)+'\n'+JSON.stringify(response.data.docEmotions);					
 				//console.log(response);
