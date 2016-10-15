@@ -62,7 +62,6 @@ router.post('/analyze', function(req, res, next) {
 
 router.post('/post', function(req,res,next) {
 	var req_user_id = req.body.user_id;
-<<<<<<< HEAD
 	var req_text = req.body.payload;
 	var req_day = req.body.day;
 	var req_month = req.body.month;
@@ -112,7 +111,6 @@ router.post('/post', function(req,res,next) {
 		console.log('Entry saved successfully!');
 		res.status(200).json({status:"ok",user:req_user_id,date:''+req_day+'-'+req_month+'-'+req_year});
 	});
-=======
 	var text = req.body.payload;
 	var time = Date.now();
 	
@@ -160,10 +158,6 @@ router.post('/post', function(req,res,next) {
 		}
 	});	
 
-
-
-
->>>>>>> c7b9d9e0e5db6f1f7af91aedef958e772cb540a8
 });
 
 /* GET home page. */

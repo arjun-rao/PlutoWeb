@@ -6,9 +6,9 @@ var Schema = mongoose.Schema;
 var diarySchema = new Schema({
   user_id: { type: String, required: true},
   date: {
-    day: { type: Number, required: true, default: 1 },
-    month: { type: Number, required: true, default: 1 },
-    year: { type: Number, required: true, default: 1990 }
+    day: { type: String, required: true, default: 1 },
+    month: { type: String, required: true, default: 1 },
+    year: { type: String, required: true, default: 1990 }
   },
   body: { type: String, required: true },
   watson_response: { type: String , default: null },
