@@ -96,7 +96,7 @@ router.post('/post', function(req,res,next) {
 				};
 	
 
-	// if our user.js file is at app/models/user.js
+
 	var diaryEntry = require('../models/diaryEntry.js');
 	
 	
@@ -210,6 +210,71 @@ router.get('/status', function(req, res) {
   });
 
 
+});
+
+
+
+router.post('/insights', function(req,res,next) {
+
+	var req_user_id = req.body.user_id;	
+	var req_day = req.body.day;
+	var req_month = req.body.month;
+	var req_year = req.body.year;
+	var d =
+			 {
+					day: req_day,
+					month: req_month,
+					year: req_year
+				};
+	
+
+	var diaryEntry = require('../models/diaryEntry.js');
+	
+	
+	
+	//Watson Code Starts Here
+	var watson_reply = '';	
+	var parameters = {
+		extract: 'entities,doc-emotion',
+		sentiment: 1,
+		maxRetrieve: 1,
+		text : req_text
+	};
+
+
+	alchemy_language.combined(parameters, function (err, response) {
+		if (err)
+		{
+			console.log("Watson Died!");
+			res.status(500).json({status:"Watson API failed"});
+			return; 
+		}
+		else
+		{
+			console.log(JSON.stringify(response, null, 2));
+			watson_reply = JSON.stringify(response,null,2);																				
+			var entry = new diaryEntry({
+				user_id: req_user_id,
+				body: req_text,
+				date: {
+					day: req_day,
+					month: req_month,
+					year: req_year
+				},
+				watson_response: watson_reply 
+				});
+
+			entry.save(function(err) {
+				if (err) {
+					console.log(err);
+					res.status(400).json({status:"db save failed"});
+					return;
+				}
+				console.log('Entry saved successfully!');
+				res.status(200).json({status:"ok", time:d, analysis:watson_reply});
+			});
+		}
+	});
 });
 
 /* GET home page. */
