@@ -1,32 +1,32 @@
 0 info it worked if it ends with ok
-1 verbose cli [ '/usr/bin/nodejs', '/usr/bin/npm', 'start' ]
+1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'start' ]
 2 info using npm@3.10.3
-3 info using node@v6.5.0
+3 info using node@v6.6.0
 4 verbose run-script [ 'prestart', 'start', 'poststart' ]
 5 info lifecycle plutoweb@0.0.0~prestart: plutoweb@0.0.0
 6 silly lifecycle plutoweb@0.0.0~prestart: no script for prestart, continuing
 7 info lifecycle plutoweb@0.0.0~start: plutoweb@0.0.0
 8 verbose lifecycle plutoweb@0.0.0~start: unsafe-perm in lifecycle true
-9 verbose lifecycle plutoweb@0.0.0~start: PATH: /usr/lib/node_modules/npm/bin/node-gyp-bin:/home/abhilash1in/Desktop/icare/PlutoWeb/node_modules/.bin:/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/local/java/jdk1.8.0_92/bin:/usr/local/java/jdk1.8.0_92/jre/bin:/usr/bin/idea-IC-145.1617.8/bin:/usr/bin/apache-storm-1.0.1/bin:/usr/bin/zookeeper-3.4.8/bin:/home/abhilash1in/ns-allinone-2.35/bin:/home/abhilash1in/ns-allinone-2.35/tcl8.5.10/unix:/home/abhilash1in/ns-allinone-2.35/tk8.5.10/unix
-10 verbose lifecycle plutoweb@0.0.0~start: CWD: /home/abhilash1in/Desktop/icare/PlutoWeb
+9 verbose lifecycle plutoweb@0.0.0~start: PATH: /usr/local/lib/node_modules/npm/bin/node-gyp-bin:/Users/arjun/projects/icare2016/PlutoWeb/node_modules/.bin:/usr/local/bin:/Users/arjun/Library/Enthought/Canopy_64bit/User/bin:/Library/Frameworks/Python.framework/Versions/2.7/bin:/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin:/Users/arjun/Library/Android/sdk/platform-tools:~/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Users/arjun/temp/hadoop/sqoop/bin:/Users/arjun/temp/hadoop/hadoop/bin:/Users/arjun/bin:/Users/arjun/files/msrit/ns2/ns/bin:/Users/arjun/files/msrit/ns2/ns/tcl8.5.10/unix:/Users/arjun/files/msrit/ns2/ns/tk8.5.10/unix:/Users/arjun/files/msrit/ns2/xgraph/xgraph/bin
+10 verbose lifecycle plutoweb@0.0.0~start: CWD: /Users/arjun/projects/icare2016/PlutoWeb
 11 silly lifecycle plutoweb@0.0.0~start: Args: [ '-c', 'node ./bin/www' ]
 12 silly lifecycle plutoweb@0.0.0~start: Returned: code: 1  signal: null
 13 info lifecycle plutoweb@0.0.0~start: Failed to exec start script
 14 verbose stack Error: plutoweb@0.0.0 start: `node ./bin/www`
 14 verbose stack Exit status 1
-14 verbose stack     at EventEmitter.<anonymous> (/usr/lib/node_modules/npm/lib/utils/lifecycle.js:242:16)
+14 verbose stack     at EventEmitter.<anonymous> (/usr/local/lib/node_modules/npm/lib/utils/lifecycle.js:242:16)
 14 verbose stack     at emitTwo (events.js:106:13)
 14 verbose stack     at EventEmitter.emit (events.js:191:7)
-14 verbose stack     at ChildProcess.<anonymous> (/usr/lib/node_modules/npm/lib/utils/spawn.js:40:14)
+14 verbose stack     at ChildProcess.<anonymous> (/usr/local/lib/node_modules/npm/lib/utils/spawn.js:40:14)
 14 verbose stack     at emitTwo (events.js:106:13)
 14 verbose stack     at ChildProcess.emit (events.js:191:7)
 14 verbose stack     at maybeClose (internal/child_process.js:877:16)
 14 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:226:5)
 15 verbose pkgid plutoweb@0.0.0
-16 verbose cwd /home/abhilash1in/Desktop/icare/PlutoWeb
-17 error Linux 4.4.0-31-generic
-18 error argv "/usr/bin/nodejs" "/usr/bin/npm" "start"
-19 error node v6.5.0
+16 verbose cwd /Users/arjun/projects/icare2016/PlutoWeb
+17 error Darwin 16.0.0
+18 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "start"
+19 error node v6.6.0
 20 error npm  v3.10.3
 21 error code ELIFECYCLE
 22 error plutoweb@0.0.0 start: `node ./bin/www`

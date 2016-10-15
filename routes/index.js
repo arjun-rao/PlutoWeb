@@ -227,54 +227,45 @@ router.post('/insights', function(req,res,next) {
 					year: req_year
 				};
 	
-
+	console.log(req_user_id);
 	var diaryEntry = require('../models/diaryEntry.js');
-	
-	
-	
-	//Watson Code Starts Here
-	var watson_reply = '';	
-	var parameters = {
-		extract: 'entities,doc-emotion',
-		sentiment: 1,
-		maxRetrieve: 1,
-		text : req_text
-	};
-
-
-	alchemy_language.combined(parameters, function (err, response) {
-		if (err)
-		{
-			console.log("Watson Died!");
-			res.status(500).json({status:"Watson API failed"});
-			return; 
-		}
-		else
-		{
-			console.log(JSON.stringify(response, null, 2));
-			watson_reply = JSON.stringify(response,null,2);																				
-			var entry = new diaryEntry({
-				user_id: req_user_id,
-				body: req_text,
-				date: {
-					day: req_day,
-					month: req_month,
-					year: req_year
-				},
-				watson_response: watson_reply 
-				});
-
-			entry.save(function(err) {
+	diaryEntry.
+  	find({user_id: req_user_id}).  	
+  	limit(7).  
+  	select('watson_response').
+  	exec(function (err, results) {
 				if (err) {
 					console.log(err);
-					res.status(400).json({status:"db save failed"});
-					return;
+					res.status(400).json({status:"Failed to get insights"});
 				}
-				console.log('Entry saved successfully!');
-				res.status(200).json({status:"ok", time:d, analysis:watson_reply});
+				else{
+					//console.log(results);
+					/*"docEmotions": {
+      "anger": "0.049212",
+      "disgust": "0.031257",
+      "fear": "0.065342",
+      "joy": "0.504712",
+      "sadness": "0.40317" */
+					var points = {
+						"anger": [],
+						"disgust": [],
+						"fear": [],
+						"joy":[],
+						"sadness":[]
+					};
+					results.forEach(function(element) {
+						var watreply = JSON.parse(element.watson_response);
+						var emotions = watreply.docEmotions;
+						for (var key in emotions)
+						{
+							points[key].push(emotions[key]);
+						}
+					}, this);
+					res.status(200).json({status:"Found",res:points});
+				}			
 			});
-		}
-	});
+	
+	
 });
 
 /* GET home page. */
