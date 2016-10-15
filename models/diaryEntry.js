@@ -16,7 +16,8 @@ var diarySchema = new Schema({
   updated_at: { type: Date, default: Date.now }
 });
 
-diarySchema.index({user_id:1, date:-1},{unique : true});
+//todo - uncomment later (commented for debugging)
+//diarySchema.index({user_id:1, date:-1},{unique : true});
 
 // the schema is useless so far
 // we need to create a model using it
