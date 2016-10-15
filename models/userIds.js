@@ -5,6 +5,7 @@ var Schema = mongoose.Schema;
 // create a schema
 var userIdSchema = new Schema({
   user_id: { type: String, required: true, unique: true},
+  name: { type: String, required: true},
   created_at: { type: Date, default: Date.now },
   updated_at: { type: Date, default: Date.now }
 });

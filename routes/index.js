@@ -65,9 +65,11 @@ router.post('/analyze', function(req, res, next) {
 
 router.post('/init',function(req,res,next){
 	var req_user_id = req.body.user_id;
+	var req_user_name = req.body.name;
 	var userIdEntry = require('../models/userIds.js');
 	var userid = new userIdEntry({
-		user_id: req_user_id
+		user_id: req_user_id,
+		name: req_user_name
 	});
 	userid.save(function(err){
 		if ( err )
