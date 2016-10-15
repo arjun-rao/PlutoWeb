@@ -93,16 +93,26 @@ angular.module('myApp').controller('registerController',
 }]);
 
 angular.module('myApp').controller('homeController', [ '$scope', '$http', function($scope, $http) {
-      $scope.patients = [
-      "Alfreds Futterkiste",
-      "Berglunds snabbkp",
-      "Centro comercial Moctezuma",
-      "Ernst Handel",
-    ];
-
+     
+     
+       $http.post('/patients')
+			.then(function successCallback(response) {
+				$scope.patients= response.data.patients;					
+				//console.log(response);
+				$scope.showPatients = true;
+			}, function errorCallback(response) {
+				
+				$scope.showPatiens = false;
+			});		
+             
     $scope.addPatient = function () {
       	$scope.showResult = true;
     };
+    
+    $scope.showGraph = function (user_id) {
+      	$scope.displayGraph = true;
+        $scope.pInsightName = user_id;
+    };  
 
 
 

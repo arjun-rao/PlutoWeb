@@ -270,6 +270,32 @@ router.post('/insights', function(req,res,next) {
 	
 });
 
+
+router.post('/patients', function(req,res,next) {
+
+	
+	
+	var userIds = require('../models/userIds.js');
+	userIds.
+  	find().  	  
+  	select({user_id:1, name:1,_id:0}).
+  	exec(function (err, results) {
+				if (err) {
+					console.log(err);
+					res.status(400).json({status:"Failed to get users"});
+				}
+				else{
+				
+					res.status(200).json({status:"Found",patients:results});
+				}			
+			});
+	
+	
+});
+
+
+
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index');
