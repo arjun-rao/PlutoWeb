@@ -1,0 +1,11 @@
+<div class="container">
+    <div class="jumbotron">
+        <h1>Analyse Entry</h1>
+        <div class="form-group">
+            <label for="inputlg">Dear Diary...</label>
+            <textarea style="margin: 0px -2px 0px 0px; width: 580px; height: 485px;" class="form-control input-lg" id="inputlg" ng-model="payload"></textarea><br>
+            <button class="btn btn-lg btn-success" ng-click="onSubmit()">Submit</a>
+        </div>
+        <textarea style="margin: 0px; width: 496px; height: 130px;" ng-if="showResult">{{ result }}</textarea>
+    </div>
+</div>

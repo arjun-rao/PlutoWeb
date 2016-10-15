@@ -5,6 +5,9 @@ var bluemix = require('../config/bluemix');
 var extend = require('util')._extend;
 var watson = require('watson-developer-cloud');
 var mongoose = require('mongoose');
+var passport = require('passport');
+
+var User = require('../models/user.js');
 
 
 var alchemy_language = watson.alchemy_language({
@@ -108,10 +111,69 @@ router.post('/post', function(req,res,next) {
 			});
 		}
 	});	
+});
 
 
 
+router.post('/register', function(req, res) {
+  User.register(new User({ username: req.body.username }),
+    req.body.password, function(err, account) {
+    if (err) {
+      return res.status(500).json({
+        err: err
+      });
+    }
+    passport.authenticate('local')(req, res, function () {
+      return res.status(200).json({
+        status: 'Registration successful!'
+      });
+    });
+  });
+});
 
+router.post('/login', function(req, res, next) {
+	console.log("foundLogin " );
+  passport.authenticate('local', function(err, user, info) {
+    if (err) {
+			console.log("CallBackError");
+      return next(err);
+    }
+    if (!user) {
+			console.log("InvalidUserError");
+      return res.status(401).json({
+        err: info
+      });
+    }
+    req.logIn(user, function(err) {
+      if (err) {
+				console.log("InvalidLoginError");
+        return res.status(500).json({
+          err: 'Could not log in user'
+        });
+      }
+      res.status(200).json({
+        status: 'Login successful!'
+      });
+    });
+  })(req, res, next);
+});
+
+router.get('/logout', function(req, res) {
+  req.logout();
+  res.status(200).json({
+    status: 'Bye!'
+  });
+});
+
+router.get('/status', function(req, res) {
+  if (!req.isAuthenticated()) {
+    return res.status(200).json({
+      status: false
+    });
+  }
+  res.status(200).json({
+    status: true
+  });
 });
 
 /* GET home page. */

@@ -5,7 +5,7 @@
  */
 
 var app = require('../app');
-var debug = require('debug')('nlcdemo:server');
+var debug = require('debug')('passport-mongo');
 var http = require('http');
 var mongoose = require('mongoose');
 
@@ -13,7 +13,7 @@ var mongoose = require('mongoose');
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort('3000');
 app.set('port', port);
 
 /**
@@ -98,11 +98,13 @@ function connect () {
   return mongoose.connect('mongodb://localhost:27017/icare', options).connection;
 }
 
-connect()
+/*connect()
     .on('error', console.log)
     .on('disconnected', connect)
     .once('open', function() {
       // we're connected!
       console.log('Mongoose connected to mongodb');
       listen();
-    });
+    });*/
+
+listen();

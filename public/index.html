@@ -1,29 +1,26 @@
-<!DOCTYPE html>
-<html lang="en" ng-app="angularApp">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		
-		<title>PlutoWeb Endpoint</title>
-		<link href="css/bootstrap.min.css" rel="stylesheet">
-		<link href="css/jumbotron-narrow.css" rel="stylesheet">
-	</head>
-	<body ng-controller="nlcController">
-		<div class="container">
-			<div class="jumbotron">
-				<h1>Analyse Entry</h1>
-				<div class="form-group">
-					<label for="inputlg">Dear Diary...</label>
-					<textarea style="margin: 0px -2px 0px 0px; width: 580px; height: 485px;" class="form-control input-lg" id="inputlg" ng-model="payload"></textarea><br>
-					<button class="btn btn-lg btn-success" ng-click="onSubmit()">Submit</a>
-				</div>
-				<textarea style="margin: 0px; width: 496px; height: 130px;" ng-if="showResult">{{ result }}</textarea>
-			</div>
-		</div>
-		<script src="js/jquery/jquery-2.1.4.min.js"></script>
-		<script src="js/bootstrap/bootstrap.min.js"></script>
-		<script src="js/angular/angular.min.js"></script>
-		<script src="js/app.js"></script>
-	</body>
+<!doctype html>
+<html ng-app="myApp">
+
+<head>
+  <meta charset="utf-8">
+  <title>PlutoWeb</title>
+  <!-- styles -->
+  <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.6/yeti/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  
+  <div class="container">
+    <div ng-view></div>    
+  </div>
+
+  <!-- scripts -->
+  <script src="//code.jquery.com/jquery-2.2.1.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.9/angular.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.9/angular-route.min.js"></script>
+  <script src="main.js"></script>
+  <script src="services.js"></script>
+  <script src="controllers.js"></script>
+
+</body>
 </html>
