@@ -63,6 +63,24 @@ router.post('/analyze', function(req, res, next) {
 	
 });
 
+router.post('/init',function(req,res,next){
+	var req_user_id = req.body.user_id;
+	var userIdEntry = require('../models/userIds.js');
+	var userid = new userIdEntry({
+		user_id: req_user_id
+	});
+	userid.save(function(err){
+		if ( err )
+		{
+			console.log(err);
+			res.status(400).json({status:"user save failed"});
+			return;
+		}
+		console.log('User init saved successfully!');
+		res.status(200).json({status:"ok"});
+	});
+});
+
 router.post('/post', function(req,res,next) {
 
 	var req_user_id = req.body.user_id;
@@ -113,14 +131,14 @@ router.post('/post', function(req,res,next) {
 			entry.save(function(err) {
 				if (err) {
 					console.log(err);
-					res.status(500).json({status:"db save failed"});
+					res.status(400).json({status:"db save failed"});
 					return;
 				}
 				console.log('Entry saved successfully!');
-				res.status(200).json({status:"ok"});
+				res.status(200).json({status:"ok", time:date.day, analysis:watson_reply});
 			});
 		}
-	});	
+	});
 });
 
 
