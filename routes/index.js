@@ -217,15 +217,15 @@ router.get('/status', function(req, res) {
 router.post('/insights', function(req,res,next) {
 
 	var req_user_id = req.body.user_id;	
-	var req_day = req.body.day;
-	var req_month = req.body.month;
-	var req_year = req.body.year;
-	var d =
-			 {
-					day: req_day,
-					month: req_month,
-					year: req_year
-				};
+	// var req_day = req.body.day;
+	// var req_month = req.body.month;
+	// var req_year = req.body.year;
+	// var d =
+	// 		 {
+	// 				day: req_day,
+	// 				month: req_month,
+	// 				year: req_year
+	// 			};
 	
 	console.log(req_user_id);
 	var diaryEntry = require('../models/diaryEntry.js');
