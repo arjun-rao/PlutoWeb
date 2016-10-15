@@ -135,7 +135,7 @@ router.post('/post', function(req,res,next) {
 					return;
 				}
 				console.log('Entry saved successfully!');
-				res.status(200).json({status:"ok", time:date, analysis:watson_reply});
+				res.status(200).json({status:"ok", time:date.day, analysis:watson_reply});
 			});
 		}
 	});
