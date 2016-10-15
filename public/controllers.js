@@ -91,3 +91,19 @@ angular.module('myApp').controller('registerController',
     };
 
 }]);
+
+angular.module('myApp').controller('homeController', [ '$scope', '$http', function($scope, $http) {
+      $scope.patients = [
+      "Alfreds Futterkiste",
+      "Berglunds snabbkp",
+      "Centro comercial Moctezuma",
+      "Ernst Handel",
+    ];
+
+    $scope.addPatient = function () {
+      	$scope.showResult = true;
+    };
+
+
+
+	}]);

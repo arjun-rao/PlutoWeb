@@ -1,5 +1,63 @@
-<h1>Yo!</h1>
+<div ng-controller="logoutController" class="text-right">
+  Hello Doctor! <a ng-click='logout()' class="btn btn-default">Logout</a>
+</div>
 
-<div ng-controller="logoutController">
-  <a ng-click='logout()' class="btn btn-default">Logout</a>
+<h1>Your Patients</h1>
+<hr>
+
+
+
+<div class="container">
+    
+    
+    <div class="col-md-6">
+    <md-card ng-repeat="x in patients">
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">{{x}}</span>            
+          </md-card-title-text>
+          <md-card-title-media>
+            <div class="md-media-lg card-media">
+              <span style="font-size:10em" class="glyphicon glyphicon-user"></span>
+            </div>
+          </md-card-title-media>
+        </md-card-title>
+        <md-card-actions layout="row" layout-align="end center">
+          <a class="btn btn-default">View Insights</a>
+          <a class="btn btn-default">Post Recommendation</a>
+        </md-card-actions>
+      </md-card>
+    </div>
+    
+    <div class="col-md-6">
+    <md-card>      
+        <md-card-header>          
+          <md-card-header-text>
+            <span class="md-title">Add Patient</span>            
+          </md-card-header-text>
+        </md-card-header>          
+        <md-card-content>                    
+         <form ng-submit="addPatient()">
+          <div class="form-group">
+            <label>Patient Name</label>
+            <input type="text" class="form-control" name="pname" ng-model="patientForm.name" required>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+             <input type="email" class="form-control" name="pemail" ng-model="patientForm.email" required>
+            </div>
+            <div>
+              <button type="submit" class="btn btn-default" ng-disabled="disabled">invite</button>
+            </div>
+        </form>
+        
+        <md-card-actions layout="row" ng-if="showResult" layout-align="start center">
+          <p>Added Patient!</p>
+        </md-card-actions>
+        </md-card-content>      
+      </md-card>
+      
+    </div>
+    
+
 </div>
