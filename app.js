@@ -12,7 +12,8 @@ var routes = require('./routes/index');
 
 var app = express();
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/icare');
+//mongoose.connect('mongodb://localhost:27017/icare');
+
 // user schema/model
 var User = require('./models/user.js');
 

@@ -98,13 +98,13 @@ function connect () {
   return mongoose.connect('mongodb://localhost:27017/icare', options).connection;
 }
 
-/*connect()
+connect()
     .on('error', console.log)
     .on('disconnected', connect)
     .once('open', function() {
       // we're connected!
       console.log('Mongoose connected to mongodb');
       listen();
-    });*/
+    });
 
-listen();
+connect();
