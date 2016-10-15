@@ -5,7 +5,11 @@ var Schema = mongoose.Schema;
 // create a schema
 var diarySchema = new Schema({
   user_id: { type: String, required: true},
-  date: { type: Date, required: true, default: Date.now },
+  date: {
+    day: { type: String, required: true, default: 1 },
+    month: { type: String, required: true, default: 1 },
+    year: { type: String, required: true, default: 1990 }
+  },
   body: { type: String, required: true },
   watson_response: { type: String , default: null },
   created_at: { type: Date, default: Date.now },

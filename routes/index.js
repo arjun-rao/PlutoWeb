@@ -65,6 +65,55 @@ router.post('/analyze', function(req, res, next) {
 
 router.post('/post', function(req,res,next) {
 	var req_user_id = req.body.user_id;
+	var req_text = req.body.payload;
+	var req_day = req.body.day;
+	var req_month = req.body.month;
+	var req_year = req.body.year;
+
+	console.log(req.body);
+
+	// if our user.js file is at app/models/user.js
+	var diaryEntry = require('../models/diaryEntry.js');
+	
+	/*diaryEntry
+	.findone({
+			user_id:req_user_id,
+			'date.day': req_day,
+			'date.month': req_month,
+			'date.year': req_year
+	})
+	.exec(function(err, existing_entry) {
+		if ( err ) {
+			console.log(err);
+			throw err;
+		}
+		//existing entry for that day is found, stop registration
+		if ( existing_entry ) {
+			console.log("entry already exists");
+			return;
+		}
+		console.log("entry created");
+	});*/
+
+	var entry = new diaryEntry({
+			user_id: req_user_id,
+			date: {
+				day: req_day,
+				month: req_month,
+				year: req_year
+			},
+			body: req_text
+		});
+
+		entry.save(function(err) {
+  		if (err) {
+  			console.log(err);
+  			res.status(500).json({status:"failed"});
+  			return;
+  		}
+		console.log('Entry saved successfully!');
+		res.status(200).json({status:"ok",user:req_user_id,date:''+req_day+'-'+req_month+'-'+req_year});
+	});
 	var text = req.body.payload;
 	var time = Date.now();
 	
@@ -112,6 +161,7 @@ router.post('/post', function(req,res,next) {
 		}
 	});	
 });
+
 
 
 
@@ -174,6 +224,8 @@ router.get('/status', function(req, res) {
   res.status(200).json({
     status: true
   });
+
+
 });
 
 /* GET home page. */
