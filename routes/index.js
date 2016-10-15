@@ -88,6 +88,12 @@ router.post('/post', function(req,res,next) {
 	var req_day = req.body.day;
 	var req_month = req.body.month;
 	var req_year = req.body.year;
+	var d =
+			 {
+					day: req_day,
+					month: req_month,
+					year: req_year
+				};
 	
 
 	// if our user.js file is at app/models/user.js
@@ -116,7 +122,6 @@ router.post('/post', function(req,res,next) {
 		{
 			console.log(JSON.stringify(response, null, 2));
 			watson_reply = JSON.stringify(response,null,2);																				
-			// create a new user called chris
 			var entry = new diaryEntry({
 				user_id: req_user_id,
 				body: req_text,
@@ -135,7 +140,7 @@ router.post('/post', function(req,res,next) {
 					return;
 				}
 				console.log('Entry saved successfully!');
-				res.status(200).json({status:"ok", time:date.day, analysis:watson_reply});
+				res.status(200).json({status:"ok", time:d, analysis:watson_reply});
 			});
 		}
 	});
