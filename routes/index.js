@@ -11,7 +11,7 @@ var User = require('../models/user.js');
 
 
 var alchemy_language = watson.alchemy_language({
-  api_key: 'e5c15cad20f0fdee05566005da27dbbbfd41d31a'
+  api_key: 'INSERTAPIKEY'
 });
 
 
